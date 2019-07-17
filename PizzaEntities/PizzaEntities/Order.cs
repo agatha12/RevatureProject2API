@@ -19,5 +19,6 @@ namespace PizzaEntities
         public string status { get; set; }
         [Required]
         public decimal price { get; set; }
+        public string address { get; set; }
     }
 }
