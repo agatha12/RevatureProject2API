@@ -17,6 +17,7 @@ namespace PizzaAPI
 {
     public class Startup
     {
+   
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,7 +32,20 @@ namespace PizzaAPI
                 Configuration.GetConnectionString("MyDBContext")
                 ));
             //services.AddDbContext<PizzaAppContext>(opt => opt.UseInMemoryDatabase("PizzaApp"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Origins",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44390/")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    
+                    });
+            });
+
+                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,11 @@ namespace PizzaAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("Origins");
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
