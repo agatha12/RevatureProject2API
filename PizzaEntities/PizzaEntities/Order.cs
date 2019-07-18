@@ -18,6 +18,7 @@ namespace PizzaEntities
         [Required]
         public string status { get; set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal price { get; set; }
         public string address { get; set; }
     }
