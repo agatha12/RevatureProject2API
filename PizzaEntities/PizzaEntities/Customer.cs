@@ -20,6 +20,12 @@ namespace PizzaEntities
         [Required]
         public long phoneNumber { get; set; }
         [Required]
+        public long creditCardNumber { get; set; }
+        [Required]
+        public DateTime expDate { get; set; }
+        [Required]
+        public int cvc { get; set; }
+        [Required]
         public string email { get; set; }
         [Required]
         [StringLength(18, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
